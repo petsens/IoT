@@ -6,3 +6,7 @@ BarkTracker
 https://github.com/f4ngy/BarkTracker
 
 Peeter, Jaagup, Kristjan
+
+Speech recognition karaoke 
+
+Speech recognition speech to text notepad
