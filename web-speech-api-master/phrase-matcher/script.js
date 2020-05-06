@@ -19,6 +19,7 @@ var diagnosticPara = document.querySelector('.output');
 
 var testBtn = document.querySelector('button');
 
+var score = 0;
 var counter = 0;
 
 /* function randomPhrase() {
@@ -131,7 +132,6 @@ testBtn.addEventListener('click', testSpeech);
 
 addScore = (scoreAdd) => {
   console.log('addScore');
-  var score = 0;
   score = score + scoreAdd;
   console.log("Score =" + score);
 }
