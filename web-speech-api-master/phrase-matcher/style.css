@@ -39,12 +39,6 @@ button {
   margin-top: 30px;
 }
 
-@media all and (max-height: 410px) {
-  div {
-    position: static;
-  }
-}
-
 .phrase {
   font-weight: bold;
   font-size: 16px;
@@ -56,4 +50,16 @@ button {
 
 .output {
   font-style: italic;
+}
+
+@media all and (min-height: 410px) {
+  div {
+    position: static;
+  }
+}
+
+@media all and (max-height: 410px) {
+  div {
+    position: static;
+  }
 }
