@@ -1,18 +1,16 @@
 var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
-var score = 0;
 
 var phrases = [
-  '',
-  'Last Christmas I gave you my heart',
-  'But the very next day you gave it away',
-  'This year to save me from tears',
-  "I'll give it to someone special",
-  'Last Christmas I gave you my heart',
-  'But the very next day you gave it away',
-  'This year, to save me from tears',
-  "I'll give it to someone special",
+  'I love to sing because it\'s fun',
+  'where are you going',
+  'can I call you tomorrow',
+  'why did you talk while I was talking',
+  'she enjoys reading books and playing games',
+  'where are you going',
+  'have a great day',
+  'she sells seashells on the seashore'
 ];
 
 var phrasePara = document.querySelector('.phrase');
@@ -21,16 +19,19 @@ var diagnosticPara = document.querySelector('.output');
 
 var testBtn = document.querySelector('button');
 
-function nextPhrase() {
-  number = Math.floor(Math.random() * phrases.length);
+var counter = 0;
+
+/* function randomPhrase() {
+  var number = Math.floor(Math.random() * phrases.length);
   return number;
-}
+}*/
 
 function testSpeech() {
   testBtn.disabled = true;
   testBtn.textContent = 'Test in progress';
 
-  var phrase = phrases[nextPhrase()];
+  console.log(counter);
+  var phrase = phrases[counter];
   // To ensure case consistency while checking with the returned output text
   phrase = phrase.toLowerCase();
   phrasePara.textContent = phrase;
@@ -42,7 +43,6 @@ function testSpeech() {
   var recognition = new SpeechRecognition();
   var speechRecognitionList = new SpeechGrammarList();
   speechRecognitionList.addFromString(grammar, 1);
-  recognition.continuous = false;
   recognition.grammars = speechRecognitionList;
   recognition.lang = 'en-US';
   recognition.interimResults = false;
@@ -64,13 +64,11 @@ function testSpeech() {
     if(speechResult === phrase) {
       resultPara.textContent = 'I heard the correct phrase!';
       resultPara.style.background = 'lime';
-      score += 1;
-      console.log("Score", score);
+      addScore(0);
     } else {
       resultPara.textContent = 'That didn\'t sound right.';
       resultPara.style.background = 'red';
-      score -= 1;
-      console.log("Score", score);
+      addScore();
     }
 
     console.log('Confidence: ' + event.results[0][0].confidence);
@@ -79,12 +77,13 @@ function testSpeech() {
   recognition.onspeechend = function() {
     recognition.stop();
     testBtn.disabled = false;
-    testBtn.textContent = 'Next phrase';
+    testBtn.textContent = 'Start new test';
+    nextLine();
   }
 
   recognition.onerror = function(event) {
     testBtn.disabled = false;
-    testBtn.textContent = 'Next phrase';
+    testBtn.textContent = 'Start new test';
     diagnosticPara.textContent = 'Error occurred in recognition: ' + event.error;
   }
   
@@ -129,3 +128,16 @@ function testSpeech() {
 }
 
 testBtn.addEventListener('click', testSpeech);
+
+addScore = (scoreAdd) => {
+  console.log('addScore');
+  var score = 0;
+  score = score + scoreAdd;
+  console.log("Score =" + score);
+}
+
+nextLine = () => {
+  console.log("nextLine");
+  counter++;
+  testSpeech();
+};
