@@ -23,6 +23,7 @@ var testBtn = document.querySelector('button');
 
 var score = 0;
 var counter = 0;
+var success = 0;
 
 addScore = (scoreAdd) => {
   //console.log('addScore');
@@ -50,7 +51,7 @@ function testSpeech() {
   phrase = phrase.toLowerCase();
   phrasePara.textContent = phrase;
   nextPhrasePara.textContent = nextPhrase;
-  scorePara.textContent = counter;
+  scorePara.textContent = "Your score is = " + success;
   resultPara.textContent = 'Right or wrong?';
   resultPara.style.background = 'rgba(0,0,0,0.2)';
   diagnosticPara.textContent = '...diagnostic messages';
@@ -73,6 +74,7 @@ function testSpeech() {
       resultPara.textContent = 'I heard the correct phrase!';
       resultPara.style.background = 'lime';
       addScore(0);
+      success ++;
     } else {
       resultPara.textContent = "That didn't sound right.";
       resultPara.style.background = 'red';
