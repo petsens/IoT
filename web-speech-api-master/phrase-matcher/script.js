@@ -13,7 +13,8 @@ var phrases = [
   "I'll give it to someone special"
 ];
 
-var scorePara = document.querySelector('.score')
+var mistakesPara = document.querySelector('.mistakes')
+var scorePara = document.querySelector('.score');
 var phrasePara = document.querySelector('.phrase');
 var nextPhrasePara = document.querySelector('.nextPhrase');
 var resultPara = document.querySelector('.result');
@@ -29,6 +30,11 @@ addScore = (scoreAdd) => {
   //console.log('addScore');
   score = score + scoreAdd;
   console.log("Mistakes = " + score);
+}
+
+addSuccess = (successAdd) => {
+  success = success + successAdd;
+  console.log("Score = " + success);
 }
 
 nextLine = () => {
@@ -52,6 +58,7 @@ function testSpeech() {
   phrasePara.textContent = phrase;
   nextPhrasePara.textContent = nextPhrase;
   scorePara.textContent = "Your score is = " + success;
+  mistakesPara.textContent = "You have made " + score + " mistakes";
   resultPara.textContent = 'Right or wrong?';
   resultPara.style.background = 'rgba(0,0,0,0.2)';
   diagnosticPara.textContent = '...diagnostic messages';
@@ -74,11 +81,12 @@ function testSpeech() {
       resultPara.textContent = 'I heard the correct phrase!';
       resultPara.style.background = 'lime';
       addScore(0);
-      success ++;
+      addSuccess(1);
     } else {
       resultPara.textContent = "That didn't sound right.";
       resultPara.style.background = 'red';
       addScore(1);
+      addSuccess(0);
     }
 
     console.log('Confidence: ' + event.results[0][0].confidence);
