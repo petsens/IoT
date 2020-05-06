@@ -68,7 +68,7 @@ function testSpeech() {
     } else {
       resultPara.textContent = 'That didn\'t sound right.';
       resultPara.style.background = 'red';
-      addScore();
+      addScore(1);
     }
 
     console.log('Confidence: ' + event.results[0][0].confidence);
@@ -139,5 +139,9 @@ addScore = (scoreAdd) => {
 nextLine = () => {
   console.log("nextLine");
   counter++;
-  testSpeech();
+  if(counter == 8){
+    console.log("läbi");
+  }else{
+    testSpeech();
+  }
 };
