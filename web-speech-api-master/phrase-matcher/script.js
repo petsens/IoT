@@ -13,6 +13,7 @@ var phrases = [
   "I'll give it to someone special"
 ];
 
+var scorePara = document.querySelector('.score')
 var phrasePara = document.querySelector('.phrase');
 var nextPhrasePara = document.querySelector('.nextPhrase');
 var resultPara = document.querySelector('.result');
@@ -49,6 +50,7 @@ function testSpeech() {
   phrase = phrase.toLowerCase();
   phrasePara.textContent = phrase;
   nextPhrasePara.textContent = nextPhrase;
+  scorePara.textContent = counter;
   resultPara.textContent = 'Right or wrong?';
   resultPara.style.background = 'rgba(0,0,0,0.2)';
   diagnosticPara.textContent = '...diagnostic messages';
