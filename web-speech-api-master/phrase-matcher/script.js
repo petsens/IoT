@@ -14,6 +14,7 @@ var phrases = [
 ];
 
 var phrasePara = document.querySelector('.phrase');
+var nextPhrasePara = document.querySelector('.nextPhrase');
 var resultPara = document.querySelector('.result');
 var diagnosticPara = document.querySelector('.output');
 
@@ -22,14 +23,32 @@ var testBtn = document.querySelector('button');
 var score = 0;
 var counter = 0;
 
+addScore = (scoreAdd) => {
+  //console.log('addScore');
+  score = score + scoreAdd;
+  console.log("Mistakes = " + score);
+}
+
+nextLine = () => {
+  console.log("nextLine");
+  counter++;
+  if(counter == phrases.length){
+    console.log("Finish");
+  }else{
+    testSpeech();
+  }
+};
+
 function testSpeech() {
   testBtn.disabled = true;
-  testBtn.textContent = 'Test in progress';
+  testBtn.textContent = 'Song in progress';
 
   console.log(counter);
   var phrase = phrases[counter];
+  var nextPhrase = phrases[counter + 1];
   phrase = phrase.toLowerCase();
   phrasePara.textContent = phrase;
+  nextPhrasePara.textContent = nextPhrase;
   resultPara.textContent = 'Right or wrong?';
   resultPara.style.background = 'rgba(0,0,0,0.2)';
   diagnosticPara.textContent = '...diagnostic messages';
@@ -113,22 +132,5 @@ function testSpeech() {
   //     console.log('SpeechRecognition.onstart');
   // }
 }
-
-addScore = (scoreAdd) => {
-  //console.log('addScore');
-  score = score + scoreAdd;
-  console.log("Mistakes = " + score);
-}
-
-nextLine = () => {
-  console.log("nextLine");
-  counter++;
-  if(counter == phrases.length){
-    console.log("Finish");
-  }else{
-    testSpeech();
-  }
-};
-
 
 testBtn.addEventListener('click', testSpeech);
